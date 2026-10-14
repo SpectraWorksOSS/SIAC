@@ -1,0 +1,20 @@
+{
+  "case": "siac_v1_sentinel2_radcalnet",
+  "processor": "SIAC v1, MarcYin/SIAC commit fc6e592 as run in our pipeline (compatibility changes only: data access, Python 3.12 / numpy fixes, AOI windowing, CAMS time-index fallback; solver unchanged); Sentinel-2 entry point, run per scene with an AOI around each site",
+  "sensors": [
+    "S2A",
+    "S2B",
+    "S2C"
+  ],
+  "reference": "RadCalNet published surface reflectance (.input files), five of the six sites (BTCN excluded: the window is larger than its target)",
+  "radcalnet_snapshot": "RadCalNet all-sites ASCII archive downloaded 2026-06-30",
+  "siac_value": "median of SIAC v1 BOA over a 21 x 21 native-pixel window centred on the site (0.21 km for 10 m bands, 0.42 km for 20 m bands, 1.26 km for 60 m bands)",
+  "siac_uncertainty": "SIAC v1's own per-pixel BOA uncertainty (*_unc), median over the same window",
+  "radcalnet_uncertainty": "RadCalNet reported surface uncertainty, band-integrated, treated as k=1",
+  "residual": "SIAC v1 BOA minus RadCalNet surface reflectance",
+  "combined_unc": "sqrt(siac_unc^2 + radcalnet_unc^2)",
+  "frac_within_1sigma": "fraction of samples with |residual| <= combined_unc",
+  "frac_within_1sigma_centre_removed": "same, after subtracting that site x band's mean residual; in-sample diagnostic of dispersion only, not a corrected product",
+  "excluded": "Baotou samples whose window is larger than the RadCalNet target (all BTCN samples and the 20 m / 60 m bands at BSCN), scenes where only a whole-granule mean was available, and the atmospheric bands B9/B10",
+  "band_integration": "RadCalNet 10 nm spectrum weighted by ESA's published spectral response of the Sentinel-2 MSI band for the relevant unit (S2A, S2B or S2C; Sentinel-2 Spectral Response Functions, COPE-GSEG-EOPG-TN-15-0007 v4.0) (SRF-only weighting, no solar-irradiance weighting); RadCalNet's per-wavelength uncertainty is carried as fully correlated across wavelengths within a band (upper bound) and treated as k=1, because RadCalNet publishes no coverage factor"
+}

@@ -1,0 +1,19 @@
+{
+  "case": "siac_v1_sentinel2_aeronet_aod",
+  "processor": "SIAC v1, MarcYin/SIAC commit fc6e592 as run in our pipeline (compatibility changes only: data access, Python 3.12 / numpy fixes, AOI windowing, CAMS time-index fallback; solver unchanged); Sentinel-2 entry point, default CAMS AOD prior",
+  "stations": [
+    "Ames",
+    "Cairo_EMA_2",
+    "Granada",
+    "Ispra",
+    "Kanpur",
+    "Karachi",
+    "Lille"
+  ],
+  "period": "2023 to 2025",
+  "matchups": 87,
+  "siac_value": "median AOD550 in a 5 km window around the station",
+  "aeronet_value": "AERONET Level 2.0 AOD interpolated to 550 nm, median over the coincidence window",
+  "residual": "SIAC minus AERONET",
+  "per_matchup_table": "not yet included; will be added as matchups.csv"
+}

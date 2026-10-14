@@ -1,0 +1,10 @@
+subset,n,rmse,bias,notes
+all,87,0.1265,-0.036,MAE 0.0940; residual sd 0.1220
+aeronet_aod_lt_0.2,38,0.0613,0.0285,
+aeronet_aod_0.2_to_0.5,35,0.1198,-0.0646,
+aeronet_aod_ge_0.5,14,0.2311,-0.1392,
+S2A,37,0.0939,-0.002,
+S2B,43,0.1495,-0.056,
+S2C,7,0.1227,-0.093,
+cams_prior_vs_aeronet_all,87,0.1342,,"raw CAMS AOD550 prior SIAC received, at the station"
+siac_vs_cams_prior_all,87,0.0199,,retrieval minus prior; median |retrieval-prior| 0.0065

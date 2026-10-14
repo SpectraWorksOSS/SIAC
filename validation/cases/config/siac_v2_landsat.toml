@@ -1,0 +1,45 @@
+[paths]
+dem = "/vsicurl/https://raw.githubusercontent.com/MarcYin/Copernicus_GLO_30_DEM_VRT/refs/heads/main/copernicus_GLO_30_dem.vrt"
+water_mask = "https://zenodo.org/records/14899246/files/landWater2020.vrt?download=1"
+cache_root = "/data/siac/cache"
+
+[auth.cds]
+api_key_env = "ADS_TOKEN"
+
+[auth.earthdata]
+username_env = "EARTHDATA_USERNAME"
+password_env = "EARTHDATA_PASSWORD"
+
+[providers.atmo]
+kind = "cams"
+data_path = "/data/siac/cache/atmo"
+cache_dir = "/data/siac/cache/atmo"
+download_missing = true
+
+[providers.brdf]
+kind = "mcd43"
+temporal_window = 16
+cache_dir = "/data/siac/cache/brdf"
+
+[algorithms.cloud_mask]
+provider = "product_qa"
+target_resolution_m = 30.0
+
+[algorithms.rt]
+backend = "lut"
+
+[algorithms.solver]
+method = "multigrid"
+aerosol_resolution = 120.0
+
+[algorithms.surface_prior]
+psf_shift_reference_bands = ["B7", "B6"]
+psf_convolve_resolution = "grid"
+
+[output.defaults]
+format = "cog"
+include_uncertainty = true
+include_auxiliary = true
+include_rgb = false
+include_previews = false
+boa_dtype = "float32"

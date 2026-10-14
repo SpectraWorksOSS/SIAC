@@ -1,0 +1,12 @@
+quantity,value
+n_band_samples,1051
+n_scenes,113
+n_site_days,106
+sites,BSCN GONA GSCN LCFR RVUS
+sensors,S2A S2B S2C
+date_range,2024-07-01 to 2025-12-14
+median_abs_residual,0.00948
+rms_residual,0.02184
+frac_within_1sigma,0.777
+frac_within_1sigma_nominal_gaussian,0.683
+frac_within_1sigma_site_band_centre_removed_in_sample,0.817

@@ -1,0 +1,102 @@
+{
+  "case": "landsat8_rvus_2024-11-28",
+  "sensor": "Landsat 8 OLI",
+  "site": {
+    "name": "Railroad Valley Playa, Nevada, USA (RadCalNet site RVUS, RVUS00)",
+    "lat": 38.497,
+    "lon": -115.69
+  },
+  "region_of_interest": {
+    "definition": "1 km x 1 km square, north-up, centred on the RadCalNet RVUS site coordinates",
+    "projection": "+proj=aeqd +lat_0=38.497 +lon_0=-115.69 +datum=WGS84 +units=m",
+    "pixel_weighting": "area-weighted mean; each 30 m pixel weighted by its fractional overlap with the square",
+    "orientation_note": "RadCalNet does not publish the square's orientation; north-up is assumed",
+    "aoi_passed_to_siac_wsen_deg": [
+      -115.79,
+      38.397,
+      -115.59,
+      38.597
+    ]
+  },
+  "landsat_l1": {
+    "product_id": "LC08_L1TP_040033_20241128_20241203_02_T1",
+    "acquired_at_utc": "2024-11-28T18:21:09.483508+00:00"
+  },
+  "usgs_l2sp": {
+    "product_id": "LC08_L2SP_040033_20241128_20241203_02_T1",
+    "stac_item": "LC08_L2SP_040033_20241128_02_T1",
+    "scale_offset": "SR = DN * 2.75e-05 - 0.2"
+  },
+  "siac_v2_run": {
+    "siac_repository": "https://github.com/SpectraWorksOSS/SIAC",
+    "siac_branch": "feature/landsat-c2-l1",
+    "siac_commit": "70b3570bbd415bb855298e4a96b8d2bb177897d8",
+    "siac_commit_note": "upstream MarcYin/SIAC feat/refactor at ad2cdf2 plus the Landsat 8/9 Collection 2 Level-1 preprocessor commit",
+    "siac_config": "../config/siac_v2_landsat.toml",
+    "siac_config_sha256": "9ea9228ff11bfe1bc03e2f5da0dd2531d260462e3ef91fd06f218dcf2e184fd4",
+    "aoi_wsen_deg": [
+      -115.79,
+      38.397,
+      -115.59,
+      38.597
+    ],
+    "input_product": "LC08_L1TP_040033_20241128_20241203_02_T1",
+    "input_archive_sha256": "f8d51851128b412f5a4baf1e4b3a1f0e7d0f6c6e29fab2a34f359d2f979b0de6",
+    "acquired_at_utc": "2024-11-28T18:21:09.483508+00:00",
+    "processed_at_utc": "2026-10-08T19:22:52.298537+00:00",
+    "siac_v2_boa_uncertainty": "not emitted at this commit"
+  },
+  "siac_v1_run": {
+    "siac_repository": "https://github.com/MarcYin/SIAC",
+    "siac_version": "MarcYin/SIAC commit fc6e592 as run in our pipeline (compatibility changes only: data access, Python 3.12 / numpy fixes, AOI windowing, CAMS time-index fallback; solver unchanged); SIAC_L8 entry point, run with an AOI around the site",
+    "outputs_used": "*_sur.tif (BOA) and *_sur_unc.tif (BOA uncertainty), scale 1e-4"
+  },
+  "radcalnet": {
+    "snapshot": "RadCalNet all-sites ASCII archive downloaded 2026-06-30",
+    "records": [
+      {
+        "record_file": "RVUS/RVUS00_2024_329_v00.06.input",
+        "record_version": "00.06",
+        "observed_at_utc": "2024-11-24T17:30:00+00:00",
+        "offset_from_overpass_s": -348669.5,
+        "ancillary": {
+          "AOD": 0.02,
+          "Ang": 1.056,
+          "DOY(L)": 329.0,
+          "Local": "9:30",
+          "O3": 315.0,
+          "P": 856.0,
+          "T": 280.0,
+          "Type": "R",
+          "WV": 0.601
+        }
+      },
+      {
+        "record_file": "RVUS/RVUS00_2024_335_v00.06.input",
+        "record_version": "00.06",
+        "observed_at_utc": "2024-11-30T18:30:00+00:00",
+        "offset_from_overpass_s": 173330.5,
+        "ancillary": {
+          "AOD": 0.019,
+          "Ang": 1.368,
+          "DOY(L)": 335.0,
+          "Local": "10:30",
+          "O3": 284.0,
+          "P": 865.0,
+          "T": 271.8,
+          "Type": "R",
+          "WV": 0.23
+        }
+      }
+    ],
+    "band_integration": "RadCalNet 10 nm spectrum weighted by the USGS relative spectral response of the sensor band (SRF-only weighting, no solar-irradiance weighting); RadCalNet's per-wavelength uncertainty is carried as fully correlated across wavelengths within a band (upper bound) and treated as k=1, because RadCalNet publishes no coverage factor"
+  },
+  "columns": {
+    "siac_v2_boa": "SIAC v2 BOA reflectance, ROI mean",
+    "siac_v2_roi_sd": "spatial standard deviation inside the ROI (not an uncertainty)",
+    "siac_v1_boa_unc": "ROI mean of SIAC v1's own per-pixel BOA uncertainty",
+    "usgs_l2sp_sr": "USGS Collection 2 Level-2 surface reflectance, ROI mean",
+    "radcalnet_boa_*": "RadCalNet surface reflectance for the record date in the column name",
+    "radcalnet_boa_unc_k1_*": "RadCalNet surface reflectance uncertainty, band-integrated, k=1"
+  }
+}
